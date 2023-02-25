@@ -1,0 +1,1 @@
+UNet的预训练权重是ddpm-church-256，网址是https://huggingface.co/google/ddpm-church-256/tree/main，下载好的全部文件放入pretrained文件夹中即可。
