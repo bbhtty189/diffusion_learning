@@ -61,7 +61,7 @@ class TrainingConfig:
 
 config = TrainingConfig()
 
-config.dataset_name = r"E:\datasets\flowers"
+config.dataset_name = r"./flowers"
 dataset = load_dataset(config.dataset_name, split="train")
 
 print(dataset)
