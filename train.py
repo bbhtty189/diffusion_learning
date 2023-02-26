@@ -38,7 +38,7 @@ def show(clean_img, sample, epoch, i):
     axs[1].set_axis_off()
     plt.title("step " + str(epoch) + " i " + str(i))
     plt.savefig(os.path.join("./imgs_fold", "epoch-" + str(epoch) + "_i-" + str(i)+".jpg"))
-    plt.show()
+    # plt.show()
 
 @dataclass
 class TrainingConfig:
@@ -61,7 +61,9 @@ class TrainingConfig:
 
 config = TrainingConfig()
 
-config.dataset_name = r"./flowers"
+# config.dataset_name = r"./flowers"
+# dataset = load_dataset(config.dataset_name, split="train")
+config.dataset_name = "huggan/smithsonian_butterflies_subset"
 dataset = load_dataset(config.dataset_name, split="train")
 
 print(dataset)
@@ -180,10 +182,10 @@ def train_loop(config, model, noise_scheduler, optimizer, train_dataloader, lr_s
                     sample = scheduler.step(residual, t, sample).prev_sample
 
                     # 3. optionally look at image
-                    if (i + 1) % 50 == 0:
-                        # combine_img = torch.cat((clean_images, sample))
-                        show(clean_images, sample, step, i)
-                        # vutils.save_image(combine_img, os.path.join('./imgs_fold', f"{epoch}_{step}_{i}.jpg"), nrow=1)
+                    if (i + 1) % 200 == 0:
+                        combine_img = torch.cat((clean_images, sample))
+                        # show(clean_images, sample, step, i)
+                        vutils.save_image(combine_img, os.path.join('./imgs_fold', f"{epoch}_{step}_{i}.jpg"))
 
 
 if __name__ == "__main__":
